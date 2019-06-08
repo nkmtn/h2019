@@ -1,0 +1,4 @@
+.idea
+venv
+client/node_modules
+client/dist
