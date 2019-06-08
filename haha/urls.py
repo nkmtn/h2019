@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from rest_framework_jwt.views import obtain_jwt_token
 
+from users import views
+
 """haha URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,5 +23,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('users/', include('users.urls')),
+    path('login/', views.login, name='login'),
+    path('get_users/', views.get_all_users, name='get_all_users'),
+    path('get_this_user/', views.get_this_user, name='get_this_user'),
     path('admin/', admin.site.urls),
 ]

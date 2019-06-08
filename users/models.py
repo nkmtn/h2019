@@ -62,3 +62,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
         return self
+
+
+class TokenManager(models.Manager):
+    def create_token(self, token_value, user_id):
+        token = self.create(token_value=token_value, user_id=user_id)
+        token.save()
+        return token
+
+
+class Token(models.Model):
+    token_value = models.CharField(max_length=64, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    last_update = models.DateTimeField(auto_now=True)
+
+    objects = TokenManager()
