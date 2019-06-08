@@ -1,3 +1,6 @@
+from django.conf.urls import url
+from rest_framework_jwt.views import obtain_jwt_token
+
 """haha URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -14,8 +17,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
+    path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
