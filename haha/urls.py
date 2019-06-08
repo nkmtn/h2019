@@ -22,6 +22,4 @@ from django.urls import path, include
 urlpatterns = [
     path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
-    url(r'^api-token-auth/', obtain_jwt_token),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
