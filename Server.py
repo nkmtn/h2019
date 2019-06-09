@@ -1,4 +1,5 @@
 from flask import Flask,request,jsonify
+from server.api.User import api_user
 from flask_cors import CORS
 import json
 import string
@@ -6,6 +7,7 @@ import random
 import time
 
 app = Flask(__name__)
+app.register_blueprint(api_user)
 CORS(app)
 
 def genRandomString():
