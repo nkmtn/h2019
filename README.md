@@ -1,86 +1,36 @@
-# h2019
+Django ORM Standalone Template
+==============================
 
-Платформа для мониторинга трудоустройства (ПМТ) — программный комплекс для сбора данных о трудоустройстве выпускников учреждений среднего профессионального и высшего образования, и создания статистических отчетов.
+Authors - Dan Caron, Abu Ashraf Masnun, wsqy
 
+This is a Django project template that allows you to use the database component of Django without having to use the rest of Django (i.e. running a web server). Now you can write regular python scripts and use Django's excellent ORM functionality with the database of your choice.
 
-***
-## **Достижения**
-* *Achieve* — достижение, добавленное пользователем, с последующей верификацией модератором <br/>
-*achieve_id* — идентификатор конкретного достижения <br/>
-*worker_id* — идентификатор пользователя <br/>
-*career_id* — идентификатор рабочего периода, для привязки к месту получения достижения если есть(мб Null) <br/>
-*published* — отметка времени публикации <br/>
-*edited* —  отметка времени редактирования <br/>
-*approved* —  отметка времени подтверждения модератором <br/>
+Requirements
+------------
+This repository doesn't ship with a Django installation. The system must have an existing django installation so that we can safely import required modules. Developed on Python 2.7+ or 3.4+ and Django 1.10.2
 
-* *Achieve_category* — типы достижений
-*achieve_category_id* —  идентификатор типа <br/>
-*achieve_category_name* — название типа достижения <br/>
-*achieve_category_parent_id* — ссылка на идентификатор родительской категории(имеет ту же структуру) <br/>
-Пример: <br/>
-*achieve_category_id*: 170, *achieve_category_name*: «Публикация», *achieve_category_parent_id*: 1; <br/>
-*achieve_category_id*: 1, *achieve_category_name*: «Научная деятельность», *achieve_category_parent_id*: Null; <br/>
+Quick Setup
+-----------
 
-* *Achieve_field_string / Achieve_field_int* — для валидации разных типов полей ввода 
-*achieve_category_\[string/int]_id* — идентификатор валидации <br/>
-*achieve_id* — идентификатор конкретного достижения <br/>
-*achieve_category_field_id* —  идентификатор поля ввода <br/>
-*achieve_category_id* — идентификатор типа достижения <br/>
-*achieve_category_\[string\/int]_value \[VARCHAR(4096)\/INT]* — значение, полученное по полю ввода <br/>
+* 1.) pip install django
+* 2.) Inside settings.py - Edit your database settings (sqlite3 setup by default)
+* 3.) Inside db/models.py - Add your models (Basic user model setup by default)
+* 4.) python main.py (Run the project)
 
-* *Achieve_category_field*
-*achieve_category_field_id*  — идентификатор поля ввода <br/>
-*achieve_category_field_name* — имя поля ввода данных <br/>
-*achieve_category_field_order* — порядковый номер поля <br/>
-*achieve_category_field_type* — тип данных поля ввода(0 → int, 1 → string) <br/>
+__main.py is the file where you start coding your project.__ Think of it like a plain old python file, but now with the power of Django's ORM functionality! Feel free to send pull requests if you want to improve this project.
 
-## **Учетная запись и поля профиля пользователя**
+Django Models
+-------------
 
-* *User* — известный системе пользователь
-*user_id* — идентификатор пользователя в системе <br/>
-*user_password* — пароль пользователя <br/>
-*user_password_salt* — дополнительный уровень безопасности пароля <br/>
-*user_password_reset_token* — ссылка на сброс пароля <br/>
-*user_password_reset_time* — отметка времени создания ссылки-сброса пароля <br/>
-*user_invitation_token* — ссылка на приглашение в систему <br/>
-*user_invitation_time* — отметка времени создания ссылки-приглашения <br/>
-*user_email* — почта пользователя <br/>
-*user_email_conformation_token* — ссылка на подтверждение почты <br/>
-*user_registration_time* — отметка времени регистрации пользователя <br/>
-*user_phone* — номер телефона пользователя <br/>
-*user_status_id* — идентификатор статуса пользователя в системе <br/>
-*user_last_name* — фамилия пользователя <br/>
-*user_first_name* — имя пользователя <br/>
-*user_middle_name* — отчество пользователя <br/>
-*user_birth_date* — дата рождения пользователя <br/>
-*user_contact* — способ связи с пользователем(JSON) <br/>
+Link: [How to use Django Models](https://docs.djangoproject.com/en/1.10/topics/db/models/)
 
-* *user_status* — статус пользователя в системе: 
-*user_status_id* — идентификатор статуса <br/>
-*user_status_code* — символьное представление статуса, для удобства: <br/>
-0 - приглашен <br/>
-1 - не подтвердил почту <br/>
-2 - нормальный пользователь <br/>
-*user_status_name* — приглашен/не подтвердил почту/нормальный <br/>
+License
+-------
 
-## **Роли пользователей**
+The MIT License (MIT) Copyright (c) 2016 Dan Caron
 
-* *Analyst* — аналитик, работающий с отчетами по трудоустройству 
-*analyst_id* — идентификатор регионального представителя <br/>
-*user_id* — идентификатор пользователя <br/>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-* *Employer* — работодатель, зарегистрированный в системе
-*employer_id* — идентификатор работадателя <br/>
-*company_id* — идентификатор компании <br/>
-*user_id* — идентификатор пользователя <br/>
-*employer_position* — должность работодателя <br/>
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-* *Worker* — пользователь, как объект персональных данных в системы
-*worker_id* — идентификатор пользователя? <br/>
-*user_id* — идентификатор пользователя <br/>
-
-* *Supervisor* — модератор, представитель университета, зарегистрированный в системе
-*supervisor_id* — идентификатор модератора <br/>
-*is_moderator* — доступ к функциям модератора(boolean) <br/> 
-*user_id* — идентификатор пользователя <br/>
-*institution_id* — идентификатор учебного учреждения <br/>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
